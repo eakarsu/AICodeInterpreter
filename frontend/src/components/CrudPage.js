@@ -10,17 +10,27 @@ export default function CrudPage({ title, apiPath, columns, fields }) {
   const [editItem, setEditItem] = useState(null);
   const [form, setForm] = useState({});
   const [loading, setLoading] = useState(true);
+  const [pagination, setPagination] = useState({ page: 1, totalPages: 1, total: 0, limit: 20 });
 
-  const load = useCallback(async () => {
+  const load = useCallback(async (page = 1) => {
     try {
       setLoading(true);
-      const { data } = await api.get(`/${apiPath}`);
-      setItems(data);
+      const { data } = await api.get(`/${apiPath}?page=${page}&limit=${pagination.limit || 20}`);
+      // Backend may return either a raw array or { data, pagination }
+      if (Array.isArray(data)) {
+        setItems(data);
+        setPagination((p) => ({ ...p, page: 1, totalPages: 1, total: data.length }));
+      } else if (data && Array.isArray(data.data)) {
+        setItems(data.data);
+        setPagination(data.pagination || { page: 1, totalPages: 1, total: data.data.length, limit: 20 });
+      } else {
+        setItems([]);
+      }
     } catch { toast.error('Failed to load data'); }
     finally { setLoading(false); }
-  }, [apiPath]);
+  }, [apiPath, pagination.limit]);
 
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { load(1); }, [load]);
 
   const openNew = () => { setEditItem(null); setForm({}); setShowModal(true); };
 
@@ -85,7 +95,7 @@ export default function CrudPage({ title, apiPath, columns, fields }) {
       <div className="page-header">
         <div>
           <h1 className="page-title">{title}</h1>
-          <p className="page-subtitle">{items.length} items</p>
+          <p className="page-subtitle">{pagination.total || items.length} items</p>
         </div>
         <button className="btn btn-primary" onClick={openNew}><FiPlus/> New {title.replace(/s$/,'').replace(/ie$/,'y')}</button>
       </div>
@@ -111,6 +121,19 @@ export default function CrudPage({ title, apiPath, columns, fields }) {
               ))}
             </tbody>
           </table>
+          {pagination.totalPages > 1 && (
+            <div style={{display:'flex',alignItems:'center',justifyContent:'space-between',padding:'12px 16px',borderTop:'1px solid var(--border)'}}>
+              <button className="btn btn-secondary btn-sm" disabled={pagination.page <= 1} onClick={() => load(pagination.page - 1)}>
+                Prev
+              </button>
+              <span style={{color:'var(--text-muted)',fontSize:12}}>
+                Page {pagination.page} / {pagination.totalPages} ({pagination.total} items)
+              </span>
+              <button className="btn btn-secondary btn-sm" disabled={pagination.page >= pagination.totalPages} onClick={() => load(pagination.page + 1)}>
+                Next
+              </button>
+            </div>
+          )}
         </div>
       )}
 

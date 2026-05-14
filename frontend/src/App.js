@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FiGrid, FiCode, FiPlay, FiBook, FiBox, FiPackage, FiBarChart2, FiDatabase, FiSearch, FiCopy, FiClock, FiLock, FiUsers, FiFileText, FiSettings, FiTerminal, FiChevronLeft, FiChevronRight, FiLogOut } from 'react-icons/fi';
+import { FiGrid, FiCode, FiPlay, FiBook, FiBox, FiPackage, FiBarChart2, FiDatabase, FiSearch, FiCopy, FiClock, FiLock, FiUsers, FiFileText, FiSettings, FiTerminal, FiChevronLeft, FiChevronRight, FiLogOut, FiBell, FiZap } from 'react-icons/fi';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import CrudPage from './components/CrudPage';
 import AIChatPage from './pages/AIChatPage';
+import AIAdvancedPage from './pages/AIAdvancedPage';
+import NotificationsPage from './pages/NotificationsPage';
+import WebhooksPage from './pages/WebhooksPage';
 
 const pages = [
   { path:'/snippets', label:'Code Snippets', icon:<FiCode/>, api:'snippets',
@@ -188,6 +191,15 @@ function Sidebar({ collapsed, setCollapsed }) {
         <NavLink to="/ai-chat" className={({isActive})=>`nav-item ${isActive?'active':''}`}>
           <span className="nav-icon"><FiTerminal/></span><span className="nav-label">AI Assistant</span>
         </NavLink>
+        <NavLink to="/ai-advanced" className={({isActive})=>`nav-item ${isActive?'active':''}`}>
+          <span className="nav-icon"><FiTerminal/></span><span className="nav-label">AI Advanced</span>
+        </NavLink>
+        <NavLink to="/notifications" className={({isActive})=>`nav-item ${isActive?'active':''}`}>
+          <span className="nav-icon"><FiBell/></span><span className="nav-label">Notifications</span>
+        </NavLink>
+        <NavLink to="/webhooks" className={({isActive})=>`nav-item ${isActive?'active':''}`}>
+          <span className="nav-icon"><FiZap/></span><span className="nav-label">Webhooks</span>
+        </NavLink>
       </ul>
       <div className="sidebar-section-title">Code</div>
       <ul className="nav-items">
@@ -239,6 +251,9 @@ function AppLayout() {
         <Routes>
           <Route path="/dashboard" element={<Dashboard pages={pages}/>} />
           <Route path="/ai-chat" element={<AIChatPage/>} />
+          <Route path="/ai-advanced" element={<AIAdvancedPage/>} />
+          <Route path="/notifications" element={<NotificationsPage/>} />
+          <Route path="/webhooks" element={<WebhooksPage/>} />
           {pages.map(p => (
             <Route key={p.path} path={p.path} element={
               <CrudPage title={p.label} apiPath={p.api} columns={p.columns} fields={p.fields} />

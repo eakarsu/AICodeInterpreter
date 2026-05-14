@@ -2,6 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const pool = require('../db');
 const auth = require('../middleware/auth');
+const aiRateLimiter = require('../middleware/rateLimiter');
 const router = express.Router();
 
 const aiCall = async (system, userMsg, temp = 0.7) => {
@@ -25,7 +26,7 @@ const aiCall = async (system, userMsg, temp = 0.7) => {
 };
 
 // Chat - General code assistant
-router.post('/chat', auth, async (req, res) => {
+router.post('/chat', auth, aiRateLimiter, async (req, res) => {
   try {
     const { message, conversation_id } = req.body;
     const data = await aiCall(
@@ -49,7 +50,7 @@ router.post('/chat', auth, async (req, res) => {
 });
 
 // Execute/Interpret code
-router.post('/execute', auth, async (req, res) => {
+router.post('/execute', auth, aiRateLimiter, async (req, res) => {
   try {
     const { code, language, context } = req.body;
     const data = await aiCall(
@@ -64,7 +65,7 @@ router.post('/execute', auth, async (req, res) => {
 });
 
 // Code Review
-router.post('/review', auth, async (req, res) => {
+router.post('/review', auth, aiRateLimiter, async (req, res) => {
   try {
     const { code, language, review_type } = req.body;
     const types = {
@@ -87,7 +88,7 @@ router.post('/review', auth, async (req, res) => {
 });
 
 // Generate Code
-router.post('/generate', auth, async (req, res) => {
+router.post('/generate', auth, aiRateLimiter, async (req, res) => {
   try {
     const { description, language, framework, style } = req.body;
     const data = await aiCall(
@@ -102,7 +103,7 @@ router.post('/generate', auth, async (req, res) => {
 });
 
 // Debug Code
-router.post('/debug', auth, async (req, res) => {
+router.post('/debug', auth, aiRateLimiter, async (req, res) => {
   try {
     const { code, error_message, language } = req.body;
     const data = await aiCall(
@@ -117,7 +118,7 @@ router.post('/debug', auth, async (req, res) => {
 });
 
 // Explain Code
-router.post('/explain', auth, async (req, res) => {
+router.post('/explain', auth, aiRateLimiter, async (req, res) => {
   try {
     const { code, language, detail_level } = req.body;
     const data = await aiCall(
@@ -132,7 +133,7 @@ router.post('/explain', auth, async (req, res) => {
 });
 
 // Refactor Code
-router.post('/refactor', auth, async (req, res) => {
+router.post('/refactor', auth, aiRateLimiter, async (req, res) => {
   try {
     const { code, language, goal } = req.body;
     const goals = {
@@ -155,7 +156,7 @@ router.post('/refactor', auth, async (req, res) => {
 });
 
 // Data Analysis
-router.post('/analyze-data', auth, async (req, res) => {
+router.post('/analyze-data', auth, aiRateLimiter, async (req, res) => {
   try {
     const { data_description, question, output_format } = req.body;
     const data = await aiCall(
@@ -170,7 +171,7 @@ router.post('/analyze-data', auth, async (req, res) => {
 });
 
 // Convert Code
-router.post('/convert', auth, async (req, res) => {
+router.post('/convert', auth, aiRateLimiter, async (req, res) => {
   try {
     const { code, from_language, to_language } = req.body;
     const data = await aiCall(
