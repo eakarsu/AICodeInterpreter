@@ -5,9 +5,40 @@ const auth = require('../middleware/auth');
 function createCrudRouter(table, { orderBy = 'created_at DESC', jsonFields = [] } = {}) {
   const router = express.Router();
 
+  // GET / — list with pagination support (?page=1&limit=20)
   router.get('/', auth, async (req, res) => {
-    try { res.json((await pool.query(`SELECT * FROM ${table} ORDER BY ${orderBy}`)).rows); }
-    catch (err) { res.status(500).json({ error: err.message }); }
+    try {
+      const { page, limit, search, search_field } = req.query;
+      const pageNum = Math.max(1, parseInt(page) || 1);
+      const pageSize = Math.min(100, Math.max(1, parseInt(limit) || 20));
+      const offset = (pageNum - 1) * pageSize;
+
+      let countResult, result;
+
+      if (search && search_field) {
+        // Whitelist search_field to prevent SQL injection (only allow word chars)
+        const safeField = search_field.replace(/[^\w]/g, '');
+        countResult = await pool.query(
+          `SELECT COUNT(*) FROM ${table} WHERE ${safeField} ILIKE $1`, [`%${search}%`]
+        );
+        result = await pool.query(
+          `SELECT * FROM ${table} WHERE ${safeField} ILIKE $1 ORDER BY ${orderBy} LIMIT $2 OFFSET $3`,
+          [`%${search}%`, pageSize, offset]
+        );
+      } else {
+        countResult = await pool.query(`SELECT COUNT(*) FROM ${table}`);
+        result = await pool.query(
+          `SELECT * FROM ${table} ORDER BY ${orderBy} LIMIT $1 OFFSET $2`,
+          [pageSize, offset]
+        );
+      }
+
+      const total = parseInt(countResult.rows[0].count);
+      res.json({
+        data: result.rows,
+        pagination: { page: pageNum, limit: pageSize, total, totalPages: Math.ceil(total / pageSize) },
+      });
+    } catch (err) { res.status(500).json({ error: err.message }); }
   });
 
   router.get('/:id', auth, async (req, res) => {
@@ -21,6 +52,7 @@ function createCrudRouter(table, { orderBy = 'created_at DESC', jsonFields = [] 
   router.post('/', auth, async (req, res) => {
     try {
       const keys = Object.keys(req.body);
+      if (keys.length === 0) return res.status(400).json({ error: 'Request body cannot be empty.' });
       const vals = keys.map((k, i) => `$${i + 1}`);
       const values = keys.map(k => jsonFields.includes(k) ? JSON.stringify(req.body[k]) : req.body[k]);
       const r = await pool.query(
@@ -33,6 +65,7 @@ function createCrudRouter(table, { orderBy = 'created_at DESC', jsonFields = [] 
   router.put('/:id', auth, async (req, res) => {
     try {
       const keys = Object.keys(req.body);
+      if (keys.length === 0) return res.status(400).json({ error: 'No fields to update.' });
       const sets = keys.map((k, i) => `${k}=$${i + 1}`);
       const values = keys.map(k => jsonFields.includes(k) ? JSON.stringify(req.body[k]) : req.body[k]);
       values.push(req.params.id);

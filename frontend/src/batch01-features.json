@@ -1,0 +1,104 @@
+{
+  "project": "AICodeInterpreter",
+  "marker": "// === Batch 01 Gaps & Frontend Mounts ===",
+  "features": [
+    {
+      "slug": "agentic-data-analyst-that-plans-executes-and-repor",
+      "component": "AgenticDataAnalystThatPlansExecutesAndReporPage",
+      "label": "Agentic data-analyst that plans, executes, and reports analyses end-to-end",
+      "endpoint": "/api/cf-agentic-data-analyst-that-plans-executes-and-repor",
+      "kind": "cfs"
+    },
+    {
+      "slug": "rag-over-the-workspace-s-existing-notebooks-for-in",
+      "component": "RagOverTheWorkspaceSExistingNotebooksForInPage",
+      "label": "RAG over the workspace's existing notebooks for institutional-knowledge reuse",
+      "endpoint": "/api/cf-rag-over-the-workspace-s-existing-notebooks-for-in",
+      "kind": "cfs"
+    },
+    {
+      "slug": "real-time-collaboration-with-shared-kernels-and-pr",
+      "component": "RealTimeCollaborationWithSharedKernelsAndPrPage",
+      "label": "Real-time collaboration with shared kernels and presence indicators",
+      "endpoint": "/api/cf-real-time-collaboration-with-shared-kernels-and-pr",
+      "kind": "cfs"
+    },
+    {
+      "slug": "white-label-deployment-for-enterprise-data-science",
+      "component": "WhiteLabelDeploymentForEnterpriseDataSciencePage",
+      "label": "White-label deployment for enterprise data-science platforms",
+      "endpoint": "/api/cf-white-label-deployment-for-enterprise-data-science",
+      "kind": "cfs"
+    },
+    {
+      "slug": "no-ai-auto-eda-dataset-profiler",
+      "component": "NoAiAutoEdaDatasetProfilerPage",
+      "label": "No AI auto-EDA / dataset-profiler",
+      "endpoint": "/api/gap-no-ai-auto-eda-dataset-profiler",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-ai-chart-recommendation-from-data-shape",
+      "component": "NoAiChartRecommendationFromDataShapePage",
+      "label": "No AI chart-recommendation from data shape",
+      "endpoint": "/api/gap-no-ai-chart-recommendation-from-data-shape",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-ai-agentic-notebook-write-run-fix-loop",
+      "component": "NoAiAgenticNotebookWriteRunFixLoopPage",
+      "label": "No AI agentic notebook (write+run+fix) loop",
+      "endpoint": "/api/gap-no-ai-agentic-notebook-write-run-fix-loop",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-ai-privacy-pii-scanner-over-datasets",
+      "component": "NoAiPrivacyPiiScannerOverDatasetsPage",
+      "label": "No AI privacy/PII scanner over datasets",
+      "endpoint": "/api/gap-no-ai-privacy-pii-scanner-over-datasets",
+      "kind": "gap"
+    },
+    {
+      "slug": "only-6-frontend-pages-despite-20-backend-routes-ui",
+      "component": "Only6FrontendPagesDespite20BackendRoutesUiPage",
+      "label": "Only 6 frontend pages despite 20 backend routes \u2014 UI gap",
+      "endpoint": "/api/gap-only-6-frontend-pages-despite-20-backend-routes-ui",
+      "kind": "gap"
+    },
+    {
+      "slug": "notification-routes-exist-but-no-email-slack-deliv",
+      "component": "NotificationRoutesExistButNoEmailSlackDelivPage",
+      "label": "Notification routes exist but no email/Slack delivery channel",
+      "endpoint": "/api/gap-notification-routes-exist-but-no-email-slack-deliv",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-export-reporting-pdf-html-notebook-export-endpo",
+      "component": "NoExportReportingPdfHtmlNotebookExportEndpoPage",
+      "label": "No export/reporting (PDF/HTML notebook export) endpoint",
+      "endpoint": "/api/gap-no-export-reporting-pdf-html-notebook-export-endpo",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-ci-cd-or-scheduled-job-trigger-orchestration",
+      "component": "NoCiCdOrScheduledJobTriggerOrchestrationPage",
+      "label": "No CI/CD or scheduled job trigger orchestration",
+      "endpoint": "/api/gap-no-ci-cd-or-scheduled-job-trigger-orchestration",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-gpu-accelerator-quota-billing-ui",
+      "component": "NoGpuAcceleratorQuotaBillingUiPage",
+      "label": "No GPU/accelerator quota & billing UI",
+      "endpoint": "/api/gap-no-gpu-accelerator-quota-billing-ui",
+      "kind": "gap"
+    },
+    {
+      "slug": "no-real-time-collaborative-cursors-presence",
+      "component": "NoRealTimeCollaborativeCursorsPresencePage",
+      "label": "No real-time collaborative cursors (presence)",
+      "endpoint": "/api/gap-no-real-time-collaborative-cursors-presence",
+      "kind": "gap"
+    }
+  ]
+}
