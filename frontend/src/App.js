@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FiGrid, FiCode, FiPlay, FiBook, FiBox, FiPackage, FiBarChart2, FiDatabase, FiSearch, FiCopy, FiClock, FiLock, FiUsers, FiFileText, FiSettings, FiTerminal, FiChevronLeft, FiChevronRight, FiLogOut, FiBell, FiZap } from 'react-icons/fi';
+import { FiGrid, FiCode, FiPlay, FiBook, FiBox, FiPackage, FiBarChart2, FiDatabase, FiSearch, FiCopy, FiClock, FiLock, FiUsers, FiFileText, FiSettings, FiTerminal, FiChevronLeft, FiChevronRight, FiLogOut, FiBell, FiZap, FiLayers } from 'react-icons/fi';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import CrudPage from './components/CrudPage';
@@ -10,6 +10,7 @@ import AIChatPage from './pages/AIChatPage';
 import AIAdvancedPage from './pages/AIAdvancedPage';
 import NotificationsPage from './pages/NotificationsPage';
 import WebhooksPage from './pages/WebhooksPage';
+import CustomViewsPage from './pages/CustomViewsPage';
 
 const pages = [
   { path:'/snippets', label:'Code Snippets', icon:<FiCode/>, api:'snippets',
@@ -200,6 +201,9 @@ function Sidebar({ collapsed, setCollapsed }) {
         <NavLink to="/webhooks" className={({isActive})=>`nav-item ${isActive?'active':''}`}>
           <span className="nav-icon"><FiZap/></span><span className="nav-label">Webhooks</span>
         </NavLink>
+        <NavLink to="/custom-views" className={({isActive})=>`nav-item ${isActive?'active':''}`}>
+          <span className="nav-icon"><FiLayers/></span><span className="nav-label">Interpreter Views</span>
+        </NavLink>
       </ul>
       <div className="sidebar-section-title">Code</div>
       <ul className="nav-items">
@@ -254,6 +258,7 @@ function AppLayout() {
           <Route path="/ai-advanced" element={<AIAdvancedPage/>} />
           <Route path="/notifications" element={<NotificationsPage/>} />
           <Route path="/webhooks" element={<WebhooksPage/>} />
+          <Route path="/custom-views" element={<CustomViewsPage/>} />
           {pages.map(p => (
             <Route key={p.path} path={p.path} element={
               <CrudPage title={p.label} apiPath={p.api} columns={p.columns} fields={p.fields} />

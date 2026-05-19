@@ -116,3 +116,6 @@ app.use('/api/gap-no-export-reporting-pdf-html-notebook-export-endpo', require('
 app.use('/api/gap-no-ci-cd-or-scheduled-job-trigger-orchestration', require('./routes/gap_no_ci_cd_or_scheduled_job_trigger_orchestration'));
 app.use('/api/gap-no-gpu-accelerator-quota-billing-ui', require('./routes/gap_no_gpu_accelerator_quota_billing_ui'));
 app.use('/api/gap-no-real-time-collaborative-cursors-presence', require('./routes/gap_no_real_time_collaborative_cursors_presence'));
+
+// Interpreter Views — 4 custom synthesized endpoints (2 viz + 2 non-viz)
+app.use('/api/custom-views', require('./routes/customViews'));
