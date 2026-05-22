@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { FiGrid, FiCode, FiPlay, FiBook, FiBox, FiPackage, FiBarChart2, FiDatabase, FiSearch, FiCopy, FiClock, FiLock, FiUsers, FiFileText, FiSettings, FiTerminal, FiChevronLeft, FiChevronRight, FiLogOut, FiBell, FiZap, FiLayers } from 'react-icons/fi';
+import { FiGrid, FiCode, FiPlay, FiBook, FiBox, FiPackage, FiBarChart2, FiDatabase, FiSearch, FiCopy, FiClock, FiLock, FiUsers, FiFileText, FiSettings, FiTerminal, FiChevronLeft, FiChevronRight, FiLogOut, FiBell, FiZap, FiLayers, FiShield } from 'react-icons/fi';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import CrudPage from './components/CrudPage';
@@ -11,6 +11,10 @@ import AIAdvancedPage from './pages/AIAdvancedPage';
 import NotificationsPage from './pages/NotificationsPage';
 import WebhooksPage from './pages/WebhooksPage';
 import CustomViewsPage from './pages/CustomViewsPage';
+
+import CodexCustomVizFeature from './pages/CodexCustomVizFeature';
+import CodexOperationsFeature from './pages/CodexOperationsFeature';
+import SandboxRiskScannerPage from './pages/SandboxRiskScannerPage';
 
 const pages = [
   { path:'/snippets', label:'Code Snippets', icon:<FiCode/>, api:'snippets',
@@ -204,6 +208,9 @@ function Sidebar({ collapsed, setCollapsed }) {
         <NavLink to="/custom-views" className={({isActive})=>`nav-item ${isActive?'active':''}`}>
           <span className="nav-icon"><FiLayers/></span><span className="nav-label">Interpreter Views</span>
         </NavLink>
+        <NavLink to="/sandbox-risk" className={({isActive})=>`nav-item ${isActive?'active':''}`}>
+          <span className="nav-icon"><FiShield/></span><span className="nav-label">Sandbox Risk</span>
+        </NavLink>
       </ul>
       <div className="sidebar-section-title">Code</div>
       <ul className="nav-items">
@@ -253,12 +260,16 @@ function AppLayout() {
       <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
       <div className={`main-content ${collapsed ? 'expanded' : ''}`}>
         <Routes>
+        <Route path="/codex/custom-viz" element={<ProtectedRoute><CodexCustomVizFeature /></ProtectedRoute>} />
+        <Route path="/codex/operations" element={<ProtectedRoute><CodexOperationsFeature /></ProtectedRoute>} />
+
           <Route path="/dashboard" element={<Dashboard pages={pages}/>} />
           <Route path="/ai-chat" element={<AIChatPage/>} />
           <Route path="/ai-advanced" element={<AIAdvancedPage/>} />
           <Route path="/notifications" element={<NotificationsPage/>} />
           <Route path="/webhooks" element={<WebhooksPage/>} />
           <Route path="/custom-views" element={<CustomViewsPage/>} />
+          <Route path="/sandbox-risk" element={<SandboxRiskScannerPage/>} />
           {pages.map(p => (
             <Route key={p.path} path={p.path} element={
               <CrudPage title={p.label} apiPath={p.api} columns={p.columns} fields={p.fields} />

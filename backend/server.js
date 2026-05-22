@@ -119,3 +119,4 @@ app.use('/api/gap-no-real-time-collaborative-cursors-presence', require('./route
 
 // Interpreter Views — 4 custom synthesized endpoints (2 viz + 2 non-viz)
 app.use('/api/custom-views', require('./routes/customViews'));
+app.use('/api/sandbox-risk', require('./routes/sandboxRiskScanner'));
