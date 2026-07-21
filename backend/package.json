@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "scripts": {
     "start": "node server.js",
-    "dev": "npx nodemon server.js"
+    "dev": "npx nodemon server.js",
+    "migrate": "node scripts/migrate.js",
+    "seed": "node seeds/seed.js",
+    "test": "node --test tests/*.test.js"
   },
   "dependencies": {
     "axios": "^1.6.2",

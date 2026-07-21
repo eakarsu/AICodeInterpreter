@@ -8,8 +8,6 @@ export default function Login() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const fill = () => { setEmail('admin@codeinterpreter.ai'); setPassword('admin123'); };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -40,7 +38,6 @@ export default function Login() {
           </div>
           <button type="submit" className="btn btn-primary login-btn">Sign In</button>
         </form>
-        <span className="login-fill" onClick={fill}>Click to fill demo credentials</span>
       </div>
     </div>
   );
