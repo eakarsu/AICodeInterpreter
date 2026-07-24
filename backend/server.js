@@ -22,7 +22,8 @@ app.use(express.json({ limit: '1mb' }));
 
 // Routes
 app.use('/api/auth', require('./routes/auth'));
-// LLM analysis is intentionally not mounted as code execution.
+// LLM analysis only; the API does not execute submitted code.
+app.use('/api/ai', require('./routes/aiNew'));
 app.use('/api/snippets', require('./routes/snippets'));
 app.use('/api/executions', require('./routes/executions'));
 app.use('/api/notebooks', require('./routes/notebooks'));
