@@ -13,5 +13,6 @@
     "react-markdown": "^9.0.1"
   },
   "scripts": { "start": "react-scripts start", "build": "react-scripts build" },
+  "proxy": "http://127.0.0.1:30126",
   "browserslist": { "production": [">0.2%","not dead","not op_mini all"], "development": ["last 1 chrome version"] }
 }

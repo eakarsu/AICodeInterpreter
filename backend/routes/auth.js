@@ -4,6 +4,24 @@ const jwt = require('jsonwebtoken');
 const pool = require('../db');
 const router = express.Router();
 
+router.get('/demo-credentials', (req, res) => {
+  if (
+    process.env.NODE_ENV === 'production' ||
+    process.env.ENABLE_DEMO_CREDENTIAL_AUTOFILL === 'false'
+  ) {
+    return res.status(404).json({ error: 'Demo credentials are unavailable' });
+  }
+
+  const email = process.env.DEMO_EMAIL || process.env.SEED_ADMIN_EMAIL;
+  const password = process.env.DEMO_PASSWORD || process.env.SEED_ADMIN_PASSWORD;
+  if (!email || !password) {
+    return res.status(404).json({ error: 'Demo credentials are unavailable' });
+  }
+
+  res.set('Cache-Control', 'no-store');
+  return res.json({ email, password });
+});
+
 router.post('/register',async(req,res)=>{try{const {email,password,name}=req.body||{};if(typeof email!=='string'||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return res.status(400).json({error:'Valid email required'});if(typeof password!=='string'||password.length<12)return res.status(400).json({error:'Password must be at least 12 characters'});if(typeof name!=='string'||!name.trim())return res.status(400).json({error:'Name required'});const hash=await bcrypt.hash(password,12);const r=await pool.query("INSERT INTO users(email,password,name,role)VALUES($1,$2,$3,'user')RETURNING id,email,name,role",[email.toLowerCase(),hash,name.trim()]);const user=r.rows[0],token=jwt.sign({id:user.id,email:user.email,role:user.role},process.env.JWT_SECRET,{expiresIn:'8h'});res.status(201).json({token,user});}catch(e){if(e.code==='23505')return res.status(409).json({error:'Email already exists'});res.status(500).json({error:'Internal server error'});}});
 
 router.post('/login', async (req, res) => {
