@@ -103,6 +103,14 @@ app.use('/api/notebook-rag', require('./routes/notebookRag')); // apply pass 6 �
 app.use('/api/shared-kernel', require('./routes/sharedKernelPresence')); // apply pass 6 — audit custom suggestion
 
 app.use('/api/enterprise-ds-white-label', require('./routes/enterpriseDsWhiteLabel')); // apply pass 6 — audit custom suggestion
+
+// Advisory AI reports only; native execution and approval routes stay unchanged.
+const aiWorkspaceSupport = require("./aiWorkspaceAdapters.cjs");
+const aiWorkspaceDatabase = require("./db.js");
+app.use('/api/report-workspace', require("./aiWorkspace.cjs").createAIWorkspaceRouter({
+  pool: aiWorkspaceDatabase, authenticateToken: require("./middleware/auth.js"),
+  aiRateLimiter: aiWorkspaceSupport.createWorkspaceLimiter(), features: require("./aiWorkspaceFeatures.json"),
+}));
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
 
 

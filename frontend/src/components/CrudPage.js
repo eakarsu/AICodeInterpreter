@@ -1,3 +1,5 @@
+import RecordDialog from './RecordDialog';
+import { AIResultValue, reportValue } from './AIResultView';
 import React, { useState, useEffect, useCallback } from 'react';
 import api from '../services/api';
 import { toast } from 'react-toastify';
@@ -82,7 +84,8 @@ export default function CrudPage({ title, apiPath, columns, fields }) {
 
   const renderDetailValue = (k, v) => {
     if (v === null || v === undefined) return <div className="detail-value">-</div>;
-    if (typeof v === 'object') return <div className="detail-json">{JSON.stringify(v, null, 2)}</div>;
+    const structured = typeof v === 'string' ? reportValue(v) : v;
+    if (structured && typeof structured === 'object') return <div className="detail-value"><AIResultValue value={structured} /></div>;
     const s = String(v);
     if (k === 'code' || (s.includes('\n') && (s.includes('def ') || s.includes('function') || s.includes('import') || s.includes('const ')))) {
       return <div className="detail-code">{s}</div>;
@@ -114,7 +117,7 @@ export default function CrudPage({ title, apiPath, columns, fields }) {
             <thead><tr><th>#</th>{columns.map(c => <th key={c}>{c.replace(/_/g,' ')}</th>)}</tr></thead>
             <tbody>
               {items.map(item => (
-                <tr key={item.id} className={selected?.id === item.id ? 'selected' : ''} onClick={() => setSelected(selected?.id === item.id ? null : item)}>
+                <tr key={item.id} className={selected?.id === item.id ? 'selected' : ''} onClick={() => setSelected(selected?.id === item.id ? null : item)} tabIndex={0} onKeyDown={(event) => { if ((event.key === 'Enter' || event.key === ' ') && event.target === event.currentTarget) { event.preventDefault(); (() => setSelected(selected?.id === item.id ? null : item))(event); } }}>
                   <td>{item.id}</td>
                   {columns.map(c => <td key={c}>{formatCell(item[c])}</td>)}
                 </tr>
@@ -138,7 +141,7 @@ export default function CrudPage({ title, apiPath, columns, fields }) {
       )}
 
       {selected && (
-        <div className="detail-panel">
+        <RecordDialog title={title} onClose={() => setSelected(null)}><div className="detail-panel">
           <div className="detail-header">
             <h2 className="detail-title">{selected.name || selected.title || selected.key || `#${selected.id}`}</h2>
             <button className="detail-close" onClick={() => setSelected(null)}><FiX/></button>
@@ -153,7 +156,7 @@ export default function CrudPage({ title, apiPath, columns, fields }) {
               {renderDetailValue(k, v)}
             </div>
           ))}
-        </div>
+        </div></RecordDialog>
       )}
 
       {showModal && (

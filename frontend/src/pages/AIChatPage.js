@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
+import AIFieldPresets from '../components/AIFieldPresets';
+import AIResultView from '../components/AIResultView';
+import { codeToolSamples, codeToolExample } from '../components/CodeToolPresets';
 import api from '../services/api';
 import { FiSend, FiTerminal, FiPlay, FiSearch, FiCode, FiAlertTriangle, FiBookOpen, FiRefreshCw, FiDatabase, FiRepeat } from 'react-icons/fi';
 
@@ -123,6 +126,7 @@ export default function AIChatPage() {
       <div className="ai-chat-container">
         {activeTool.fields && (
           <form className="ai-form" onSubmit={sendTool}>
+            <AIFieldPresets fields={activeTool.fields} samples={codeToolSamples} disabled={sending} onFill={(sample, index) => setForm(codeToolExample(activeTool.fields, sample, index, activeTool.name, form))} />
             <div className="ai-form-row">
               {activeTool.fields.map(f => (
                 <div className="form-group" key={f.name} style={f.type==='textarea'?{gridColumn:'1/-1'}:{}}>
@@ -158,7 +162,7 @@ export default function AIChatPage() {
             <div key={i} className={`chat-message ${m.role}`}>
               <div className="chat-avatar">{m.role === 'user' ? '>' : '$'}</div>
               <div className="chat-content">
-                <ReactMarkdown>{m.content}</ReactMarkdown>
+                {m.role === 'assistant' ? <AIResultView response={m.content} title={activeTool.name} model={m.model} tokens={m.usage} /> : <ReactMarkdown>{String(m.content)}</ReactMarkdown>}
                 {m.model && (
                   <div className="chat-meta">
                     <span>model: {m.model}</span>
@@ -179,6 +183,11 @@ export default function AIChatPage() {
 
         {activeTool.id === 'chat' && (
           <div className="chat-input-area">
+            <AIFieldPresets fields={[{ name: 'message', label: 'Message', type: 'textarea', required: true }]} samples={[
+              { label: 'Explain code', values: { message: 'Explain how a Python function can total [120, 85, 240, 0], including the empty-list case.' } },
+              { label: 'Debug behavior', values: { message: 'Help debug a JavaScript low-stock filter that omits items with quantity 0. Suggest a focused test.' } },
+              { label: 'Design analysis', values: { message: 'Outline a safe plan to analyze session durations by device type from a CSV with session_id, started_at, ended_at, and device_type.' } },
+            ]} disabled={sending} onFill={(sample) => setInput(sample.values.message)} />
             <textarea className="chat-input" value={input} onChange={e => setInput(e.target.value)} onKeyDown={handleKey} placeholder="Ask about code, algorithms, debugging, best practices..." rows={1} />
             <button className="btn btn-primary chat-send" onClick={sendChat} disabled={sending || !input.trim()}>
               <FiSend/>

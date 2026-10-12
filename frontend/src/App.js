@@ -1,3 +1,4 @@
+import AIReportLibrary from "./components/AIReportLibrary";
 import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, NavLink, Navigate, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
@@ -180,7 +181,7 @@ function Sidebar({ collapsed, setCollapsed }) {
   const logout = () => { localStorage.removeItem('token'); navigate('/login'); };
 
   return (
-    <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+    <><AIReportLibrary floating /><div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
         <div className="sidebar-logo">{'>_'}</div>
         <span className="sidebar-title">Code Interpreter</span>
@@ -249,7 +250,7 @@ function Sidebar({ collapsed, setCollapsed }) {
           <span className="nav-icon"><FiLogOut/></span><span className="nav-label">Logout</span>
         </div>
       </div>
-    </div>
+    </div></>
   );
 }
 

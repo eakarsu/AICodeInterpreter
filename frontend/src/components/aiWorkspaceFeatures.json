@@ -1,0 +1,100 @@
+[
+  {
+    "name": "AgenticDataAnalystThatPlansExecutesAndReporPage",
+    "id": "cf-agentic-data-analyst-that-plans-executes-and-repor",
+    "title": "Agentic data-analyst that plans, executes, and reports analyses end-to-end",
+    "description": "Prepare a professional advisory report for agentic data-analyst that plans, executes, and reports analyses end-to-end using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoAiAgenticNotebookWriteRunFixLoopPage",
+    "id": "gap-no-ai-agentic-notebook-write-run-fix-loop",
+    "title": "No AI agentic notebook (write+run+fix) loop",
+    "description": "Prepare a professional advisory report for no ai agentic notebook (write+run+fix) loop using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoAiAutoEdaDatasetProfilerPage",
+    "id": "gap-no-ai-auto-eda-dataset-profiler",
+    "title": "No AI auto-EDA / dataset-profiler",
+    "description": "Prepare a professional advisory report for no ai auto-eda / dataset-profiler using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoAiChartRecommendationFromDataShapePage",
+    "id": "gap-no-ai-chart-recommendation-from-data-shape",
+    "title": "No AI chart-recommendation from data shape",
+    "description": "Prepare a professional advisory report for no ai chart-recommendation from data shape using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoAiPrivacyPiiScannerOverDatasetsPage",
+    "id": "gap-no-ai-privacy-pii-scanner-over-datasets",
+    "title": "No AI privacy/PII scanner over datasets",
+    "description": "Prepare a professional advisory report for no ai privacy/pii scanner over datasets using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoCiCdOrScheduledJobTriggerOrchestrationPage",
+    "id": "gap-no-ci-cd-or-scheduled-job-trigger-orchestration",
+    "title": "No CI/CD or scheduled job trigger orchestration",
+    "description": "Prepare a professional advisory report for no ci/cd or scheduled job trigger orchestration using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoExportReportingPdfHtmlNotebookExportEndpoPage",
+    "id": "gap-no-export-reporting-pdf-html-notebook-export-endpo",
+    "title": "No export/reporting (PDF/HTML notebook export) endpoint",
+    "description": "Prepare a professional advisory report for no export/reporting (pdf/html notebook export) endpoint using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoGpuAcceleratorQuotaBillingUiPage",
+    "id": "gap-no-gpu-accelerator-quota-billing-ui",
+    "title": "No GPU/accelerator quota & billing UI",
+    "description": "Prepare a professional advisory report for no gpu/accelerator quota & billing ui using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NoRealTimeCollaborativeCursorsPresencePage",
+    "id": "gap-no-real-time-collaborative-cursors-presence",
+    "title": "No real-time collaborative cursors (presence)",
+    "description": "Prepare a professional advisory report for no real-time collaborative cursors (presence) using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "NotificationRoutesExistButNoEmailSlackDelivPage",
+    "id": "gap-notification-routes-exist-but-no-email-slack-deliv",
+    "title": "Notification routes exist but no email/Slack delivery channel",
+    "description": "Prepare a professional advisory report for notification routes exist but no email/slack delivery channel using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "Only6FrontendPagesDespite20BackendRoutesUiPage",
+    "id": "gap-only-6-frontend-pages-despite-20-backend-routes-ui",
+    "title": "Only 6 frontend pages despite 20 backend routes — UI gap",
+    "description": "Prepare a professional advisory report for only 6 frontend pages despite 20 backend routes — ui gap using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "RagOverTheWorkspaceSExistingNotebooksForInPage",
+    "id": "cf-rag-over-the-workspace-s-existing-notebooks-for-in",
+    "title": "RAG over the workspace's existing notebooks for institutional-knowledge reuse",
+    "description": "Prepare a professional advisory report for rag over the workspace's existing notebooks for institutional-knowledge reuse using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "RealTimeCollaborationWithSharedKernelsAndPrPage",
+    "id": "cf-real-time-collaboration-with-shared-kernels-and-pr",
+    "title": "Real-time collaboration with shared kernels and presence indicators",
+    "description": "Prepare a professional advisory report for real-time collaboration with shared kernels and presence indicators using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  },
+  {
+    "name": "WhiteLabelDeploymentForEnterpriseDataSciencePage",
+    "id": "cf-white-label-deployment-for-enterprise-data-science",
+    "title": "White-label deployment for enterprise data-science platforms",
+    "description": "Prepare a professional advisory report for white-label deployment for enterprise data-science platforms using the brief and evidence you provide. Review the findings, assumptions, and action plan before applying changes.",
+    "samples": []
+  }
+]

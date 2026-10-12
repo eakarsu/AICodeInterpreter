@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import ReactMarkdown from 'react-markdown';
+import AIFieldPresets from '../components/AIFieldPresets';
+import AIResultView from '../components/AIResultView';
+import { codeToolSamples, codeToolExample } from '../components/CodeToolPresets';
 import api from '../services/api';
 import { toast } from 'react-toastify';
 import {
@@ -168,6 +170,8 @@ export default function AIAdvancedPage() {
             run();
           }}
         >
+          <AIFieldPresets fields={active.fields} samples={codeToolSamples} disabled={running} onFill={(sample, index) => setForm(codeToolExample(active.fields, sample, index, active.name, form))} />
+          {active.id === 'clone-detect' && <p className="ai-muted">Snippet IDs must refer to existing snippets. Leave this field empty to scan the latest 25, or keep your selected IDs.</p>}
           <div className="ai-form-row">
             {active.fields.map((f) => (
               <div
@@ -227,11 +231,7 @@ export default function AIAdvancedPage() {
         {result && (
           <div className="chat-message assistant" style={{ marginTop: 18 }}>
             <div className="chat-avatar">$</div>
-            <div className="chat-content">
-              <ReactMarkdown>
-                {'```json\n' + JSON.stringify(result, null, 2) + '\n```'}
-              </ReactMarkdown>
-            </div>
+            <div className="chat-content"><AIResultView response={result} title={active.name} /></div>
           </div>
         )}
       </div>
