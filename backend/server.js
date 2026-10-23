@@ -116,4 +116,5 @@ app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
 
 // Interpreter Views — 4 custom synthesized endpoints (2 viz + 2 non-viz)
 app.use('/api/custom-views', require('./routes/customViews'));
+app.use('/api/wave30', require('./routes/wave30'));
 app.use('/api/sandbox-risk', require('./routes/sandboxRiskScanner'));

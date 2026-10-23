@@ -12,6 +12,8 @@ import AIAdvancedPage from './pages/AIAdvancedPage';
 import NotificationsPage from './pages/NotificationsPage';
 import WebhooksPage from './pages/WebhooksPage';
 import CustomViewsPage from './pages/CustomViewsPage';
+import Wave30Page from './pages/Wave30Page';
+
 
 import CodexCustomVizFeature from './pages/CodexCustomVizFeature';
 import CodexOperationsFeature from './pages/CodexOperationsFeature';
@@ -270,6 +272,7 @@ function AppLayout() {
           <Route path="/notifications" element={<NotificationsPage/>} />
           <Route path="/webhooks" element={<WebhooksPage/>} />
           <Route path="/custom-views" element={<CustomViewsPage/>} />
+          <Route path="/wave30" element={<Wave30Page />} />
           <Route path="/sandbox-risk" element={<SandboxRiskScannerPage/>} />
           {pages.map(p => (
             <Route key={p.path} path={p.path} element={

@@ -1,0 +1,5 @@
+const test=require('node:test');const assert=require('node:assert/strict');const W=require('../lib/wave30');
+test('toCsv quotes and preserves values',()=>{assert.match(W.toCsv([{a:'x,y',b:0,c:false}]),/x,y/);assert.match(W.toCsv([{a:1}]),/a/);});
+test('filterRecords search/status',()=>{assert.equal(W.filterRecords([{name:'Alpha',status:'open'},{name:'Beta',status:'done'}],{search:'alp'}).length,1);});
+test('fallback preserves false/0/empty',()=>{delete process.env.OPENROUTER_API_KEY;delete process.env.OPENAI_API_KEY;assert.equal(W.providerConfigured({}),false);const o=W.portfolioSummary([]);assert.equal(o.aiGenerated,false);assert.equal(o.sections.find(s=>s.label.includes('reviewed')).value,0);assert.ok(o.sections.some(s=>s.value===false));});
+test('task store create/list/update isolated',()=>{const s=W.createTaskStore();const t=s.create('u1',{title:'T1'});assert.equal(s.list('u1').length,1);assert.equal(s.list('u2').length,0);assert.equal(s.update('u1',t.id,{status:'done'}).status,'done');assert.throws(()=>s.create('u1',{}),/title/);});
